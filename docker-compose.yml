@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  symfony:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: symfony_app
+    restart: always
+    environment:
+      DATABASE_URL: postgresql://olive:passwordolive@postgres_db:5432/todo_db
+    volumes:
+      - ./backend:/var/www/symfony
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
